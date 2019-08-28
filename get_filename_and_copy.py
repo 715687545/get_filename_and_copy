@@ -1,11 +1,7 @@
 import os
 import shutil
 
-
-filepat="E:\\MRI_DATA"                             #原文件夹路径
-st1="3D-t1"                                                  #要提取的文件夹所包含的字符组成
-pathne="F:\\3D-T1"                                         #目标文件夹路径
-    
+ 
 """ 
 在目标文件夹中提取含有某字符串命名的文件夹下所有文件 
 """
@@ -13,10 +9,10 @@ def FindAndCopy(filepath,str1,pathnew,count=1000):         #count 表示要提�
     file1list=os.walk(filepath)                            #遍历filepath下的所有文件路径，将其写入file1list
     count0=0                                               #文件夹数量计数
     for path,d,filelist in file1list:
-        #print("正在读取数据")
+        print("正在读取数据")
         for filename in filelist:                          #filename文件名字
             k=os.path.join(path, filename)                 #path为最底层文件夹路径，filename为文件名
-            #print(k)
+            print(k)
             #path==k
             ls=path[11:]                                   #截取path路径的从第十一位起后面的字符串 ，存入ls （相当于保留原来的命名文件夹命名规律）                    
             #print(type(path))                             #test
@@ -31,7 +27,7 @@ def FindAndCopy(filepath,str1,pathnew,count=1000):         #count 表示要提�
                     
                 else:
                     shutil.copy(k,pathnew1)
-                    #print("copying")
+                    print("copying",k)
             else:
                 pass
         if(count0>=count):                                  #如果提取文件夹数量满足要求，退出，默认count=1000
@@ -39,5 +35,12 @@ def FindAndCopy(filepath,str1,pathnew,count=1000):         #count 表示要提�
 """ 
 在目标文件夹中提取含有某字符串命名的文件夹下所有文件 
 """
-
-FindAndCopy(filepat,st1,pathne,3)
+print("按任意键开始程序")
+while(True):
+    filepat=input("请输入原文件夹路径")                       #原文件夹路径
+    st1=input("请输入提取关键词")                                                  #要提取的文件夹所包含的字符组成
+    pathne=input("请输入目标文件夹路径")                                         #目标文件夹路径
+    count1=input("请输入欲提取的文件夹最大个数")
+    COUNT=int(count1)                                       #将输入数目强制转换为int类型
+    FindAndCopy(filepat,st1,pathne,COUNT)
+    print("success")
